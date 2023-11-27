@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+    .dragtarget {
+        width: 100px;
+        /* height: 100px; */
+        padding: 10px;
+        border: 1px solid rgb(206, 177, 177);
+    }
+
+    .drag2target {
+        width: 100px;
+        /* height: 100px; */
+        padding: 10px;
+        border: 1px solid rgb(206, 177, 177);
+    }
+
+    .droptarget {
+        width: 100px;
+        /* height: 100px; */
+        padding: 10px;
+        border: 1px solid rgb(206, 177, 177);
+        justify-content: right;
+    }
+
+    .inner_boxes {
+        display: flex;
+        justify-content: left;
+    }
+</style>
+
+<body>
+
+    <div class="inner_boxes">
+        <div>
+            <div class="dragtarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <p ondragstart="dragStart(event)" draggable="true" id="Header">Header</p>
+            </div>
+            <br>
+            <div class="drag2target" ondrop="drop(event)" ondragover="allowDrop(event)" background-color:>
+                <p ondragstart="dragStart(event)" draggable="true" id="Text">Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Repellendus, voluptatibus tenetur! Aut voluptas, illo nesciunt, doloribus
+                    voluptatibus magni necessitatibus dignissimos minima, dicta alias id repellat quod ullam ad ab
+                    molestias.</p>
+            </div>
+            <br>
+            <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <p ondragstart="dragStart(event)" draggable="true" id="Footer">Footer</p>
+            </div>
+        </div>
+        <div>
+            <div style="margin-left:40px;" class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <input name="mycolorpicker" type="color" id="colorPicker" oninput="changeFontColor(this.value)" />
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <p id="demo"></p>
+
+    <script>
+        function dragStart(event) {
+            event.dataTransfer.setData("Text", event.target.id);
+            document.getElementById("demo");
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+            document.getElementById("demo");
+        }
+        function changeFontColor(color) {
+            const draggedElement = document.getElementById("Text", event.target.id);
+            draggedElement.style.color = color;
+
+        }
+    </script>
+
+</body>
+
+</html>
